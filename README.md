@@ -47,7 +47,7 @@ Forget sitting on rooftops — in this game, sniping is a close-to-mid-range *ar
 
 ## 🎥 Devlog & Progress
 
-- Devlogs on [YouTube](#https://www.youtube.com/@mrdotss4967) (coming soon) documenting movement design, sniper mechanics, and level progression.
+- Devlogs on [YouTube](https://www.youtube.com/@mrdotss4967) (coming soon) documenting movement design, sniper mechanics, and level progression.
 
 ---
 
@@ -59,8 +59,8 @@ This is currently a solo-focused project. Ideas and constructive feedback are al
 
 ## 🌟 Support & Follow
 
-- [YouTube Channel](#https://www.youtube.com/@mrdotss4967)
-- [Itch.io Page](#https://mrdotss.itch.io/)
+- [YouTube Channel](https://www.youtube.com/@mrdotss4967)
+- [Itch.io Page](https://mrdotss.itch.io/)
 
 ---
 
