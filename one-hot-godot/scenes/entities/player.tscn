@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://brr1o1g0wir4d"]
+
+[ext_resource type="Script" uid="uid://bubyecpn5ccnu" path="res://scripts/player/player.gd" id="1_ucweq"]
+[ext_resource type="Script" uid="uid://b53x034fap5hd" path="res://scripts/player/fps_cam.gd" id="2_08t41"]
+[ext_resource type="Script" uid="uid://gmxe4qhyypnb" path="res://scripts/fsm/state_machine.gd" id="3_42nxq"]
+[ext_resource type="Script" uid="uid://bt5up4e6hy8g4" path="res://scripts/player/states/idle.gd" id="4_d4qa6"]
+[ext_resource type="Script" uid="uid://b8o77ibkooiyf" path="res://scripts/player/states/run.gd" id="5_d4qa6"]
+[ext_resource type="Script" uid="uid://chk2m45psm3de" path="res://scripts/player/states/crouch.gd" id="6_ss7kx"]
+[ext_resource type="Script" uid="uid://r4vvaetrwevk" path="res://scripts/player/states/air.gd" id="7_dnykm"]
+[ext_resource type="Script" uid="uid://ba7wlxq6x1hsr" path="res://scripts/player/states/dash.gd" id="8_c5rqy"]
+[ext_resource type="Script" uid="uid://debdbi6guthix" path="res://scripts/player/states/wallrun.gd" id="9_c5rqy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0qees"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0qees"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ucweq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0qees")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_0qees")
+
+[node name="wallLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(-0.6, 0, 0)
+
+[node name="wallRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0.6, 0, 0)
+
+[node name="ceilCheck" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+
+[node name="neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_08t41")
+
+[node name="head" type="Node3D" parent="neck"]
+
+[node name="playerCam" type="Camera3D" parent="neck/head"]
+current = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_42nxq")
+initial_state = NodePath("IDLE")
+print_state = true
+metadata/_custom_type_script = "uid://gmxe4qhyypnb"
+
+[node name="IDLE" type="Node" parent="StateMachine"]
+script = ExtResource("4_d4qa6")
+metadata/_custom_type_script = "uid://d1ln3ikcxemok"
+
+[node name="RUN" type="Node" parent="StateMachine"]
+script = ExtResource("5_d4qa6")
+metadata/_custom_type_script = "uid://d1ln3ikcxemok"
+
+[node name="CROUCH" type="Node" parent="StateMachine"]
+script = ExtResource("6_ss7kx")
+metadata/_custom_type_script = "uid://d1ln3ikcxemok"
+
+[node name="AIR" type="Node" parent="StateMachine"]
+script = ExtResource("7_dnykm")
+metadata/_custom_type_script = "uid://d1ln3ikcxemok"
+
+[node name="DASH" type="Node" parent="StateMachine"]
+script = ExtResource("8_c5rqy")
+metadata/_custom_type_script = "uid://d1ln3ikcxemok"
+
+[node name="WALLRUN" type="Node" parent="StateMachine"]
+script = ExtResource("9_c5rqy")
+metadata/_custom_type_script = "uid://d1ln3ikcxemok"
